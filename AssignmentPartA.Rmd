@@ -1,0 +1,125 @@
+---
+title: 'Sampling from the Exponential Distribution: Does the Central Limit Theorem
+  Apply?'
+author: "Michael M. Clark"
+date: "Wednesday, February 18, 2015"
+output:
+  pdf_document: 
+    fig_caption: yes
+---
+#Overview
+This report summarizes a simple simulation exercise to demonstrate the validity of the central limit theorem which is useful for linking the characteristics (mean, variance) of sample distributions to a poplulation. A simulated population with an exponential distribution is explored, and then the distributions of means and variances of random samples from the exponential distribution are compared to the population mean and variance to demonstrate the utility of the central limit theorem in inferring the mean and variance of the population from the sample population.
+
+#Simulations
+In this simulation exercise, it is given that the population is exponentially distributed with a rate (lambda) of 0.2. The theoretical mean and standard deviation of such a population both equal the inverse of the rate, which is 5.0 for a rate of 0.2.
+
+```{r echo=FALSE}
+set.seed(100)
+lambda <- 0.2
+ntot <- 10000
+exp.mean <- 1/lambda
+exp.sd <- 1/lambda
+population <- rexp(ntot, lambda)
+pop.mean <- mean(population)
+pop.sd <- sd(population)
+```
+Using the code given in the appendix, a simulated population of size `r ntot` was randomly generated from the exponential distribution, with lambda equal to `r lambda`. The distribution of this population is shown in Figure 1, with the theoretical mean indicated by the vertical red line positioned at the value `r exp.mean`. The calculated mean of the sample population was `r pop.mean`, which is quite close to the theoretical value of `r exp.mean`. Likewise, the calculated standard deviation of the population, `r pop.sd`, was also very close to the theoretical value of `r exp.sd`.
+
+
+```{r pop-hist, echo=FALSE, fig.width=5, fig.height=3, fig.cap="Histogram of a randomly generated population from the exponential distribution."}
+maintext1 <- paste("lambda = ", format(lambda, digits=2))
+hist(population, breaks=100, main=maintext1, xlab="f(x)", xlim=c(0, 40))
+abline(v=exp.mean, col="red", lwd=3)
+```
+
+#Sample Mean versus Theoretical Mean
+
+```{r echo=FALSE}
+set.seed(100)
+mns <- NULL
+sample.size <- 40
+for(i in 1:ntot) mns <- c(mns, mean(rexp(sample.size, lambda)))
+```
+Samples of size `r sample.size` were taken `r ntot` times from a random exponential distribution, and the mean of each collection of samples was calculated and plotted below in Figure 2. The mean of the distribution of sample means for this simulation was `r mean(mns)`, which is very close to the theoretical mean of the exponential distribution, shown by the vertical red line with a value of `r exp.mean`. This is to be expected, since by the central limit theorem the mean of individual and identically distributed samples approaches the mean of the population from which the samples were taken.
+
+```{r mns-hist, echo=FALSE, fig.width=5, fig.height=3, fig.cap="Histogram of means of random samples of size 40 from the exponential distribution. The theoretical mean was 5.0, as indicated by the vertical red line"}
+maintxt <- c(paste("samples of size =", sample.size, "from the exp. dist."), paste("lambda = ", format(lambda, digits=2), ", theoretical mean = ", format(1/lambda, digits=2)))
+xlabel <- "sample mean"
+hist(mns, breaks=100, main=maintxt, xlab=xlabel)
+abline(v=1/lambda, col="red", lwd=3)
+```
+
+#Sample Variance versus Theoretical Variance
+```{r echo=FALSE}
+set.seed(100)
+vars <- NULL
+for(i in 1:ntot) vars <- c(vars, var(rexp(sample.size, lambda)))
+```
+Samples of size `r sample.size` were taken `r ntot` times from the random exponential distribution, and the variance of each collection of samples was calculated and plotted below in Figure 3. Also shown on the plot, as a vertical red line, is the theoretical variance of the exponential distribution from this simulation exercise. The mean of the distribution of sample variances for this simulation was `r mean(vars)`, which is very close to the theoretical variance of the exponential distribution.
+
+```{r vars-hist, echo=FALSE, fig.width=5, fig.height=3, fig.cap="Histogram of variances of random samples of size 40 from the exponential distribution. The theoretical variance was 25, as indicated by the vertical red line"}
+maintxt <- c(paste("samples of size =", sample.size, "from the exp. dist."), paste("lambda = ", format(lambda, digits=2), ", theoretical variance = ", format((1/lambda)^2, digits=2)))
+xlabel <- "sample variance"
+hist(vars, breaks=100, main=maintxt, xlab=xlabel)
+abline(v=(1/lambda)^2, col="red", lwd=3)
+```
+
+#Distribution
+In the histograms shown above for the distributions of sample means and sample variances, one can see that both the means and variances are approximately normally distributed. The distribution of sample variances is slightly skewed, but it becomes more and more normal in shape as the sample size increases (see Figures 4 and 5 in the appendix). This illustrates the central limit theorem, which "states that the distribution of averages of [independent and identically distributed] variables (properly normalized) becomes that of a standard normal as the sample size increases" [reference: Professor Caffo's slide on The Central Limit Theorem in lecture 7: Asymptopia].
+
+#Appendix
+
+##Code used in the simulation exercise
+
+###Generation of sample population:
+```{r}
+set.seed(100)
+lambda <- 0.2
+ntot <- 10000
+exp.mean <- 1/lambda
+exp.sd <- 1/lambda
+population <- rexp(ntot, lambda)
+pop.mean <- mean(population)
+pop.sd <- sd(population)
+```
+
+###Generation of means of samples of size 40:
+```{r}
+set.seed(100)
+mns <- NULL
+sample.size <- 40
+for(i in 1:ntot) mns <- c(mns, mean(rexp(sample.size, lambda)))
+```
+
+###Generation of variances of samples of size 40:
+```{r}
+set.seed(100)
+vars <- NULL
+for(i in 1:ntot) vars <- c(vars, var(rexp(sample.size, lambda)))
+```
+
+###Generation of variances of samples of size 400 and 4000:
+```{r}
+sample.size2 <- 400
+vars2 <- NULL
+for(i in 1:ntot) vars2 <- c(vars2, var(rexp(sample.size2, lambda)))
+sample.size3 <- 4000
+vars3 <- NULL
+for(i in 1:ntot) vars3 <- c(vars3, var(rexp(sample.size3, lambda)))
+```
+
+##Additional Figures
+```{r vars2-hist, echo=FALSE, fig.width=5, fig.height=3, fig.cap="Histogram of variances of random samples of size 400 from the exponential distribution. The theoretical variance was 25, as indicated by the vertical red line"}
+maintxt <- c(paste("samples of size =", sample.size2, "from the exp. dist."), paste("lambda = ", format(lambda, digits=2), ", theoretical variance = ", format((1/lambda)^2, digits=2)))
+xlabel <- "sample variance"
+hist(vars2, breaks=100, main=maintxt, xlab=xlabel)
+abline(v=(1/lambda)^2, col="red", lwd=3)
+```
+
+```{r vars3-hist, echo=FALSE, fig.width=5, fig.height=3, fig.cap="Histogram of variances of random samples of size 4000 from the exponential distribution. The theoretical variance was 25, as indicated by the vertical red line"}
+maintxt <- c(paste("samples of size =", sample.size3, "from the exp. dist."), paste("lambda = ", format(lambda, digits=2), ", theoretical variance = ", format((1/lambda)^2, digits=2)))
+xlabel <- "sample variance"
+hist(vars3, breaks=100, main=maintxt, xlab=xlabel)
+abline(v=(1/lambda)^2, col="red", lwd=3)
+```
+
