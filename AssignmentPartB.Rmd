@@ -1,0 +1,26 @@
+---
+title: "Basic Inferential Analysis of Guinea Pig Tooth Growth Data"
+author: "Michael M. Clark"
+date: "Wednesday, February 18, 2015"
+output:
+  pdf_document: 
+    fig_caption: yes
+---
+
+#Overview and Summary of Tooth Growth Data
+This report summarizes a brief inferential analysis of guinea pig tooth growth data, which are available as the ToothGrowth dataset in R [source: C. I. Bliss (1952) The Statistics of Bioassay. Academic Press.; references: McNeil, D. R. (1977) Interactive Data Analysis. New York: Wiley.]. The study measured the response in length of teeth in guinea pigs subject to a dose and delivery method of Vitamin C. Each group in each study group was given a dose of Vitamin C (0.5, 1.0, or 2.0 mg) by means of one of two delivery methods (orange juice or ascorbic acid). The ToothGrowth dataset derived from this study is a data frame with 60 observations on 3 variables: tooth length (len; units of measure not reported in R help for ToothGrowth), supplement type/delivery method (supp; VC or OJ), and dose (dose; milligrams).
+
+```{r echo=FALSE, fig.cap="A summary of the tooth growth dataset, plotted by dose and by supplement type"}
+require(graphics)
+coplot(len ~ dose | supp, data = ToothGrowth, panel = panel.smooth,
+       xlab = "ToothGrowth data: length vs dose, given type of supplement")
+```
+
+
+
+
+#Analysis
+
+#Evaluating Effects of Delivery Method and Dose on Tooth Growth
+
+#Conclusions
