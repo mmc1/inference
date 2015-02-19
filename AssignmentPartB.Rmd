@@ -78,7 +78,7 @@ For the first question, a null hypothesis is established stating that dose amoun
 
 For the second question, a null hypothesis is established stating that type of supplement has no effect on the measured mean of tooth length in guinea pigs, with the alternate hypothesis stating that the type of supplement does have an effect on the measured mean of tooth length in guinea pigs. A two-sided t-test was done to compare length in subjects given orange juice to length in subjects given ascorbic acid. The groups were treated as independent with unequal variances. The test results show that zero falls within the 95% confidence interval on the mean difference between the two groups, meaning the null hypothesis cannot be rejected.
 
-The second question can be explored further by testing whether the null hypothesis holds when comparing groups at a particular dose amount. When testing subset groups, those given doses of 0.5mg and 1.0mg, we can reject the null hypothesis. Within these subsets, there is a significant difference in the mean tooth length between subjects on the orange juice supplement and those on the ascorbic acid supplement. However, comparing the groups at a dose of 2.0mg, we fail to reject the null hypothesis. The code and output of these t-tests is also included in the appendix.
+The second question can be explored further by testing whether the null hypothesis holds when comparing groups at a particular dose amount. When testing subset groups, those given doses of 0.5mg and 1.0mg, we can reject the null hypothesis. Within these subsets, there is a significant difference in the mean tooth length between subjects on the orange juice supplement and those on the ascorbic acid supplement. However, comparing the groups at a dose of 2.0mg, we fail to reject the null hypothesis. The code and output of these t-tests are also included in the appendix.
 
 #Conclusions
 Based on visual observation and two-sided t-tests the following conclusions are given. First, there is a clear effect of Vitamin C dose amount on guinea pig tooth growth, with longer tooth length being observed in subjects given higher dose amounts. Second, there may be a secondary effect of supplement type on tooth growth at lower doses, with longer tooth lengths being observed in subjects given the orange juice supplement. However, this secondary effect of supplement type is not observed in the subjects that were given a dose of 2.0mg. 
@@ -86,7 +86,7 @@ Based on visual observation and two-sided t-tests the following conclusions are 
 #Appendix
 
 ##Evaluating the Effect of Dose
-The code and output for the two-sided t-tests conducted to test the null hypothesis that measured tooth growth is not different at higher dose amounts is given here.
+The code and output for the two-sided t-tests conducted to test the null hypothesis that measured tooth growth is not different at higher dose amounts are given here.
 ```{r}
 t.test(ToothGrowth$len[ToothGrowth$dose==1.0], ToothGrowth$len[ToothGrowth$dose==0.5])
 t.test(ToothGrowth$len[ToothGrowth$dose==2.0], ToothGrowth$len[ToothGrowth$dose==1.0])
@@ -94,12 +94,12 @@ t.test(ToothGrowth$len[ToothGrowth$dose==2.0], ToothGrowth$len[ToothGrowth$dose=
 ```
 
 ##Evaluating the Effect of Supplement Type (Delivery Method)
-The code and output for the two-sided t-test conducted to test the null hypothesis that measured tooth growth is not different when comparing supplement type (delivery method).
+The code and output are given below for the two-sided t-test conducted to test the null hypothesis that measured tooth growth is not different when comparing supplement type (delivery method).
 ```{r}
 t.test(ToothGrowth$len[ToothGrowth$supp=="OJ"], ToothGrowth$len[ToothGrowth$supp=="VC"])
 ```
 
-The code and output for the two-sided t-tests conducted to test the null hypothesis that measured tooth growth is not different when comparing supplement type (delivery method) with the data subset by dose amount. Three tests are done to compare each pair of groups at dose amounts of 0.5, 1.0, and 2.0mg.
+The code and output are given below for the two-sided t-tests conducted to test the null hypothesis that measured tooth growth is not different when comparing supplement type (delivery method) with the data subset by dose amount. Three tests are done to compare each pair of groups at dose amounts of 0.5, 1.0, and 2.0mg.
 ```{r}
 t.test(ToothGrowth$len[ToothGrowth$supp=="OJ" & ToothGrowth$dose==0.5], ToothGrowth$len[ToothGrowth$supp=="VC" & ToothGrowth$dose==0.5])
 t.test(ToothGrowth$len[ToothGrowth$supp=="OJ" & ToothGrowth$dose==1.0], ToothGrowth$len[ToothGrowth$supp=="VC" & ToothGrowth$dose==1.0])
