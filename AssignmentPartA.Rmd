@@ -8,7 +8,7 @@ output:
     fig_caption: yes
 ---
 #Overview
-This report summarizes a simple simulation exercise to demonstrate the validity of the central limit theorem which is useful for linking the characteristics (mean, variance) of sample distributions to a poplulation. A simulated population with an exponential distribution is explored, and then the distributions of means and variances of random samples from the exponential distribution are compared to the population mean and variance to demonstrate the utility of the central limit theorem in inferring the mean and variance of the population from the sample population.
+This report summarizes a simple simulation exercise to demonstrate the validity of the central limit theorem which is useful for linking the characteristics (mean, variance) of sample distributions to a population. A simulated population with an exponential distribution is explored, and then the distributions of means and variances of random samples from the exponential distribution are compared to the population mean and variance to demonstrate the utility of the central limit theorem in inferring the mean and variance of the population from the sample population.
 
 #Simulations
 In this simulation exercise, it is given that the population is exponentially distributed with a rate (lambda) of 0.2. The theoretical mean and standard deviation of such a population both equal the inverse of the rate, which is 5.0 for a rate of 0.2.

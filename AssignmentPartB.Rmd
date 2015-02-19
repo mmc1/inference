@@ -11,7 +11,9 @@ data(ToothGrowth)
 ```
 
 #Overview and Summary of Tooth Growth Data
-This report summarizes a brief inferential analysis of guinea pig tooth growth data, which are available as the ToothGrowth dataset in R [source: C. I. Bliss (1952) The Statistics of Bioassay. Academic Press.; references: McNeil, D. R. (1977) Interactive Data Analysis. New York: Wiley.]. The study measured the response in length of teeth in guinea pigs subject to a dose and delivery method of Vitamin C. Each group in each study group was given a dose of Vitamin C (0.5, 1.0, or 2.0 mg) by means of one of two delivery methods (orange juice [OJ] or ascorbic acid [VC]). The ToothGrowth dataset derived from this study is a data frame with 60 observations on 3 variables: tooth length (len; units of measure not reported in R help for ToothGrowth), supplement type/delivery method (supp; VC or OJ), and dose (dose; milligrams).
+This report summarizes a brief inferential analysis of guinea pig tooth growth data, which are available as the ToothGrowth dataset in R [source: C. I. Bliss (1952) The Statistics of Bioassay. Academic Press.; references: McNeil, D. R. (1977) Interactive Data Analysis. New York: Wiley.]. The study measured the response in length of teeth in guinea pigs subject to a dose and delivery method of Vitamin C. 
+
+Each group in each study group was given a dose of Vitamin C (0.5, 1.0, or 2.0mg) by means of one of two delivery methods (orange juice [OJ] or ascorbic acid [VC]). The ToothGrowth dataset derived from this study is a data frame with 60 observations on 3 variables: tooth length (len; units of measure not reported in R help for ToothGrowth), supplement type/delivery method (supp; VC or OJ), and dose (dose; milligrams).
 
 ```{r echo=FALSE}
 data(ToothGrowth)
@@ -54,7 +56,7 @@ xlim = c(0.5, 3.5), ylim = c(0, 35), yaxs = "i", las=1)
 
 boxplot(len ~ dose, data = ToothGrowth,
 boxwex = 0.25, at = 1:3 - 0.2,
-subset = supp == "VC", col = "grey",
+subset = supp == "OJ", col = "orange",
 main = "(c)",
 xlab = "Vitamin C dose, mg",
 ylab = "tooth length",
@@ -62,9 +64,9 @@ xlim = c(0.5, 3.5), ylim = c(0, 35), yaxs = "i", las=1)
 
 boxplot(len ~ dose, data = ToothGrowth, add = TRUE,
 boxwex = 0.25, at = 1:3 + 0.2,
-subset = supp == "OJ", col = "orange", las=1, yaxt="n")
-legend("bottomright", c("Ascorbic acid", "Orange juice"),
-fill = c("grey", "orange"))
+subset = supp == "VC", col = "grey", las=1, yaxt="n")
+legend("bottomright", c("Orange juice", "Ascorbic acid"),
+fill = c("orange", "grey"), cex=0.8)
 ```
 
 Figure 2 gives a series of boxplots to further explore possible trends in the tooth growth dataset. In Figure 2(a) length is plotted by supplement type. While the mean tooth length of guinea pigs on the orange juice supplement was greater than the mean tooth length of guinea pigs on the ascorbic acid supplement, the mean values do not fall outside the interquartile range of each group. In Figure 2(b) length is plotted by dose for all supplement types. Here a clear trend of increasing tooth length with dose is apparent. Finally in Figure 2(c) length is again plotted by dose and by supplement type. Figure 2(c) also shows an apparent trend of increasing tooth length with dose in guinea pigs on the orange juice supplement and in guinea pigs on the ascorbic acid supplement. Perhaps there is a smaller or secondary effect of supplement type at doses less than 2mg that caused greater tooth growth in guinea pigs that were on the orange juice supplement. 
@@ -72,18 +74,18 @@ Figure 2 gives a series of boxplots to further explore possible trends in the to
 #Evaluating Effects of Delivery Method and Dose on Tooth Growth
 After exploring the data two questions arise. Does a higher vitamin C dose lead to greater tooth growth? Does the delivery method (i.e. type of supplement: orange juice or ascorbic acid) make a difference in tooth growth?
 
-For the first question, a null hypothesis is established stating that dose amount has no effect on the measured mean of tooth length in guinea pigs, with the alternate hypothesis stating that a higher dose amount does lead to a larger measured mean of tooth length in guinea pigs. Two-sided T-tests were done to compare length in subjects with dose 1.0 mg to length in subjects with dose 0.5 mg, and to compare length in subjects with dose 2.0 mg to length in subjects with dose 1.0 mg. The groups of data were treated as independent, and assuming unequal variance across the sample groups. The code and output of the t-tests are found in the appendix. The results indicate that the null hypothesis may be rejected in both tests with p-values of 1.3e-07 and 1.9e-05, and the alternate hypothesis is accepted that greater dose amount leads to greater measured tooth length.
+For the first question, a null hypothesis is established stating that dose amount has no effect on the measured mean of tooth length in guinea pigs, with the alternate hypothesis stating that a higher dose amount does lead to a larger measured mean of tooth length in guinea pigs. Two-sided T-tests were done to compare length in subjects with dose 1.0mg to length in subjects with dose 0.5mg, and to compare length in subjects with dose 2.0mg to length in subjects with dose 1.0mg. The groups of data were treated as independent, and assuming unequal variance across the sample groups. The code and output of the t-tests are found in the appendix. The test results indicate that the null hypothesis may be rejected in both tests with p-values of 1.3e-07 and 1.9e-05, and the alternate hypothesis is accepted that greater dose amount leads to greater measured tooth length.
 
+For the second question, a null hypothesis is established stating that type of supplement has no effect on the measured mean of tooth length in guinea pigs, with the alternate hypothesis stating that the type of supplement does have an effect on the measured mean of tooth length in guinea pigs. A two-sided t-test was done to compare length in subjects given orange juice to length in subjects given ascorbic acid. The groups were treated as independent with unequal variances. The test results show that zero falls within the 95% confidence interval on the mean difference between the two groups, meaning the null hypothesis cannot be rejected.
 
-
-
+The second question can be explored further by testing whether the null hypothesis holds when comparing groups at a particular dose amount. When testing subset groups, those given doses of 0.5mg and 1.0mg, we can reject the null hypothesis. Within these subsets, there is a significant difference in the mean tooth length between subjects on the orange juice supplement and those on the ascorbic acid supplement. However, comparing the groups at a dose of 2.0mg, we fail to reject the null hypothesis. The code and output of these t-tests is also included in the appendix.
 
 #Conclusions
-
+Based on visual observation and two-sided t-tests the following conclusions are given. First, there is a clear effect of Vitamin C dose amount on guinea pig tooth growth, with longer tooth length being observed in subjects given higher dose amounts. Second, there may be a secondary effect of supplement type on tooth growth at lower doses, with longer tooth lengths being observed in subjects given the orange juice supplement. However, this secondary effect of supplement type is not observed in the subjects that were given a dose of 2.0mg. 
 
 #Appendix
 
-##Detailed analysis
+##Evaluating the Effect of Dose
 The code and output for the two-sided t-tests conducted to test the null hypothesis that measured tooth growth is not different at higher dose amounts is given here.
 ```{r}
 t.test(ToothGrowth$len[ToothGrowth$dose==1.0], ToothGrowth$len[ToothGrowth$dose==0.5])
@@ -91,12 +93,13 @@ t.test(ToothGrowth$len[ToothGrowth$dose==2.0], ToothGrowth$len[ToothGrowth$dose=
 
 ```
 
+##Evaluating the Effect of Supplement Type (Delivery Method)
 The code and output for the two-sided t-test conducted to test the null hypothesis that measured tooth growth is not different when comparing supplement type (delivery method).
 ```{r}
 t.test(ToothGrowth$len[ToothGrowth$supp=="OJ"], ToothGrowth$len[ToothGrowth$supp=="VC"])
 ```
 
-The code and output for the two-sided t-tests conducted to test the null hypothesis that measured tooth growth is not different when comparing supplement type (delivery method) with the data subset by dose amount.
+The code and output for the two-sided t-tests conducted to test the null hypothesis that measured tooth growth is not different when comparing supplement type (delivery method) with the data subset by dose amount. Three tests are done to compare each pair of groups at dose amounts of 0.5, 1.0, and 2.0mg.
 ```{r}
 t.test(ToothGrowth$len[ToothGrowth$supp=="OJ" & ToothGrowth$dose==0.5], ToothGrowth$len[ToothGrowth$supp=="VC" & ToothGrowth$dose==0.5])
 t.test(ToothGrowth$len[ToothGrowth$supp=="OJ" & ToothGrowth$dose==1.0], ToothGrowth$len[ToothGrowth$supp=="VC" & ToothGrowth$dose==1.0])
