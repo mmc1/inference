@@ -42,7 +42,7 @@ for(i in 1:ntot) mns <- c(mns, mean(rexp(sample.size, lambda)))
 ```
 Samples of size `r sample.size` were taken `r ntot` times from a random exponential distribution, and the mean of each collection of samples was calculated and plotted below in Figure 2. The mean of the distribution of sample means for this simulation was `r mean(mns)`, which is very close to the theoretical mean of the exponential distribution, shown by the vertical red line with a value of `r exp.mean`. This is to be expected, since by the central limit theorem the mean of individual and identically distributed samples approaches the mean of the population from which the samples were taken.
 
-```{r mns-hist, echo=FALSE, fig.width=5, fig.height=3, fig.cap="Histogram of means of random samples of size 40 from the exponential distribution. The theoretical mean was 5.0, as indicated by the vertical red line"}
+```{r mns-hist, echo=FALSE, fig.width=5, fig.height=3, fig.cap="Histogram of means of random samples of size 40 from the exponential distribution. The theoretical mean was 5.0, as indicated by the vertical red line."}
 maintxt <- c(paste("samples of size =", sample.size, "from the exp. dist."), paste("lambda = ", format(lambda, digits=2), ", theoretical mean = ", format(1/lambda, digits=2)))
 xlabel <- "sample mean"
 hist(mns, breaks=100, main=maintxt, xlab=xlabel)
@@ -57,7 +57,7 @@ for(i in 1:ntot) vars <- c(vars, var(rexp(sample.size, lambda)))
 ```
 Samples of size `r sample.size` were taken `r ntot` times from the random exponential distribution, and the variance of each collection of samples was calculated and plotted below in Figure 3. Also shown on the plot, as a vertical red line, is the theoretical variance of the exponential distribution from this simulation exercise. The mean of the distribution of sample variances for this simulation was `r mean(vars)`, which is very close to the theoretical variance of the exponential distribution.
 
-```{r vars-hist, echo=FALSE, fig.width=5, fig.height=3, fig.cap="Histogram of variances of random samples of size 40 from the exponential distribution. The theoretical variance was 25, as indicated by the vertical red line"}
+```{r vars-hist, echo=FALSE, fig.width=5, fig.height=3, fig.cap="Histogram of variances of random samples of size 40 from the exponential distribution. The theoretical variance was 25, as indicated by the vertical red line."}
 maintxt <- c(paste("samples of size =", sample.size, "from the exp. dist."), paste("lambda = ", format(lambda, digits=2), ", theoretical variance = ", format((1/lambda)^2, digits=2)))
 xlabel <- "sample variance"
 hist(vars, breaks=100, main=maintxt, xlab=xlabel)
