@@ -1,7 +1,7 @@
 ---
 title: "Basic Inferential Analysis of Guinea Pig Tooth Growth Data"
 author: "Michael M. Clark"
-date: "Wednesday, February 18, 2015"
+date: "February 19, 2015"
 output:
   pdf_document: 
     fig_caption: yes

@@ -2,7 +2,7 @@
 title: 'Sampling from the Exponential Distribution: Does the Central Limit Theorem
   Apply?'
 author: "Michael M. Clark"
-date: "Wednesday, February 18, 2015"
+date: "February 19, 2015"
 output:
   pdf_document: 
     fig_caption: yes
