@@ -32,9 +32,7 @@ supp.summary
 ```
 
 ```{r echo=FALSE, fig.width=6.5, fig.height=3, fig.cap="A summary plot of the Guinea Pig tooth growth dataset, tooth length vs Vitamin C dose, grouped by supplement type with a linear trend line plotted through each group of data."}
-require(graphics)
 library(ggplot2)
-
 qplot(dose, len, data=ToothGrowth, facets = . ~ supp, geom=c("point", "smooth"), method="lm", xlab="Vitamin C dose, mg", ylab="tooth length")
 ```
 
@@ -88,21 +86,27 @@ Based on visual observation and two-sided t-tests the following conclusions are 
 ##Evaluating the Effect of Dose
 The code and output for the two-sided t-tests conducted to test the null hypothesis that measured tooth growth is not different at higher dose amounts are given here.
 ```{r}
-t.test(ToothGrowth$len[ToothGrowth$dose==1.0], ToothGrowth$len[ToothGrowth$dose==0.5])
-t.test(ToothGrowth$len[ToothGrowth$dose==2.0], ToothGrowth$len[ToothGrowth$dose==1.0])
+t.test(ToothGrowth$len[ToothGrowth$dose==1.0],
+       ToothGrowth$len[ToothGrowth$dose==0.5])
+t.test(ToothGrowth$len[ToothGrowth$dose==2.0],
+       ToothGrowth$len[ToothGrowth$dose==1.0])
 
 ```
 
 ##Evaluating the Effect of Supplement Type (Delivery Method)
 The code and output are given below for the two-sided t-test conducted to test the null hypothesis that measured tooth growth is not different when comparing supplement type (delivery method).
 ```{r}
-t.test(ToothGrowth$len[ToothGrowth$supp=="OJ"], ToothGrowth$len[ToothGrowth$supp=="VC"])
+t.test(ToothGrowth$len[ToothGrowth$supp=="OJ"],
+       ToothGrowth$len[ToothGrowth$supp=="VC"])
 ```
 
 The code and output are given below for the two-sided t-tests conducted to test the null hypothesis that measured tooth growth is not different when comparing supplement type (delivery method) with the data subset by dose amount. Three tests are done to compare each pair of groups at dose amounts of 0.5, 1.0, and 2.0mg.
 ```{r}
-t.test(ToothGrowth$len[ToothGrowth$supp=="OJ" & ToothGrowth$dose==0.5], ToothGrowth$len[ToothGrowth$supp=="VC" & ToothGrowth$dose==0.5])
-t.test(ToothGrowth$len[ToothGrowth$supp=="OJ" & ToothGrowth$dose==1.0], ToothGrowth$len[ToothGrowth$supp=="VC" & ToothGrowth$dose==1.0])
-t.test(ToothGrowth$len[ToothGrowth$supp=="OJ" & ToothGrowth$dose==2.0], ToothGrowth$len[ToothGrowth$supp=="VC" & ToothGrowth$dose==2.0])
+t.test(ToothGrowth$len[ToothGrowth$supp=="OJ" & ToothGrowth$dose==0.5],
+       ToothGrowth$len[ToothGrowth$supp=="VC" & ToothGrowth$dose==0.5])
+t.test(ToothGrowth$len[ToothGrowth$supp=="OJ" & ToothGrowth$dose==1.0],
+       ToothGrowth$len[ToothGrowth$supp=="VC" & ToothGrowth$dose==1.0])
+t.test(ToothGrowth$len[ToothGrowth$supp=="OJ" & ToothGrowth$dose==2.0],
+       ToothGrowth$len[ToothGrowth$supp=="VC" & ToothGrowth$dose==2.0])
 ```
 
